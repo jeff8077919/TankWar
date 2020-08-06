@@ -12,6 +12,7 @@ public class GameClient extends JComponent {
     private int screenHeight;
     private Tank playerTank;
     private List<Tank> enemyTanks = new ArrayList<>();
+    private List<Wall> walls = new ArrayList<>();
 
 
     public boolean stop;
@@ -45,7 +46,16 @@ public class GameClient extends JComponent {
                 enemyTanks.add(new Tank(350+j*80,500+i*80,Direction.up,true));
             }
         }
+
+        Wall[] walls={
+                new Wall(250,150,true,15),
+                new Wall(150,200,false,15),
+                new Wall(800,200,false,15)
+        };
+        this.walls.addAll(Arrays.asList(walls));
     }
+
+
 
     public int getScreenWidth(){
         return screenWidth;
@@ -61,6 +71,10 @@ public class GameClient extends JComponent {
         for (Tank tank: enemyTanks){
             tank.draw(g);
         }
+        for (Wall wall: walls){
+            wall.draw(g);
+        }
+
     }
 
     public void keyPressed(KeyEvent e){
