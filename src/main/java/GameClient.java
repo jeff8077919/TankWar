@@ -3,12 +3,16 @@ import com.sun.istack.internal.localization.NullLocalizable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 
 public class GameClient extends JComponent {
     private int screenWidth;
     private int screenHeight;
     private Tank playerTank;
+    private List<Tank> enemyTanks = new ArrayList<>();
+
 
     public boolean stop;
     GameClient(){
@@ -34,7 +38,13 @@ public class GameClient extends JComponent {
     }
 
     public void init(){
-        playerTank = new Tank(getScreenWidth()/2,getScreenHeight()/2,Direction.up);
+
+        playerTank = new Tank(500,100,Direction.down);
+        for (int i=0;i<3;i++){
+            for (int j=0;j<4;j++){
+                enemyTanks.add(new Tank(350+j*80,500+i*80,Direction.up,true));
+            }
+        }
     }
 
     public int getScreenWidth(){
@@ -48,7 +58,9 @@ public class GameClient extends JComponent {
     @Override
     public void paintComponent(Graphics g){
        playerTank.draw(g);
-
+        for (Tank tank: enemyTanks){
+            tank.draw(g);
+        }
     }
 
     public void keyPressed(KeyEvent e){

@@ -7,23 +7,39 @@ public class Tank {
     private Direction direction;
     private int speed;
     private boolean[] dirs =new boolean[4];
+    private boolean enemy=false;
 
-    public Tank(int x, int y, Direction direction) {
+    public Tank(int x,int y,Direction direction){
+        this(x,y,direction,false);
+    }
+
+    public Tank(int x, int y, Direction direction,boolean enemy) {
         this.x = x;
         this.y = y;
         this.direction = direction;
         speed = 5;
+        this.enemy = enemy;
     }
 
     public Image getImage(){
-        if (direction == Direction.up)return new ImageIcon("assets\\images\\itankU.png").getImage();
-        if (direction == Direction.down)return new ImageIcon("assets\\images\\itankD.png").getImage();
-        if (direction == Direction.left)return new ImageIcon("assets\\images\\itankL.png").getImage();
-        if (direction == Direction.right)return new ImageIcon("assets\\images\\itankR.png").getImage();
-        if (direction == Direction.up_left)return new ImageIcon("assets\\images\\itankLU.png").getImage();
-        if (direction == Direction.up_right)return new ImageIcon("assets\\images\\itankRU.png").getImage();
-        if (direction == Direction.down_left)return new ImageIcon("assets\\images\\itankLD.png").getImage();
-        if (direction == Direction.down_right)return new ImageIcon("assets\\images\\itankRD.png").getImage();
+        String name=enemy?"etank":"itank";
+
+        if (direction == Direction.up)
+            return new ImageIcon("assets\\images"+name+"\\U.png").getImage();
+        if (direction == Direction.down)
+            return new ImageIcon("assets\\images\\"+name+"D.png").getImage();
+        if (direction == Direction.left)
+            return new ImageIcon("assets\\images\\"+name+"L.png").getImage();
+        if (direction == Direction.right)
+            return new ImageIcon("assets\\images\\"+name+"R.png").getImage();
+        if (direction == Direction.up_left)
+            return new ImageIcon("assets\\images\\"+name+"LU.png").getImage();
+        if (direction == Direction.up_right)
+            return new ImageIcon("assets\\images\\"+name+"RU.png").getImage();
+        if (direction == Direction.down_left)
+            return new ImageIcon("assets\\images\\"+name+"LD.png").getImage();
+        if (direction == Direction.down_right)
+            return new ImageIcon("assets\\images\\"+name+"RD.png").getImage();
         return null;
     }
 
