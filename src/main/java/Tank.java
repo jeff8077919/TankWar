@@ -1,21 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Tank {
-    private int x;
-    private int y;
+public class Tank extends GameObject{
+//    private int x;
+//    private int y;
     private Direction direction;
     private int speed;
     private boolean[] dirs =new boolean[4];
     private boolean enemy;
 
-    public Tank(int x,int y,Direction direction){
-        this(x,y,direction,false);
+    public Tank(int x,int y,Direction direction,Image[] image){
+        this(x,y,direction,false,image);
     }
 
-    public Tank(int x, int y, Direction direction,boolean enemy) {
-        this.x = x;
-        this.y = y;
+    public Tank(int x, int y, Direction direction,boolean enemy,Image[] image) {
+        super(x,y,image);
+        this.x=x;
+        this.y=y;
         this.direction = direction;
         speed = 5;
         this.enemy = enemy;
@@ -23,10 +24,10 @@ public class Tank {
 
     public Image getImage() {
 
-        String name = enemy ? "etank" : "itank";
+//        String name = enemy ? "etank" : "itank";
+        return image[direction.ordinal()];
 
-
-        if (direction == Direction.up)
+ /*       if (direction == Direction.up)
    //         return new ImageIcon("assets/images/itankU.png").getImage();
             return new ImageIcon("assets/images/" + name + "U.png").getImage();
         if (direction == Direction.down)
@@ -52,7 +53,7 @@ public class Tank {
             return new ImageIcon("assets/images/" + name + "LD.png").getImage();
 
         return null;
-    }
+*/    }
 
 
     public void move(){
@@ -104,7 +105,7 @@ public class Tank {
             determineDirection();
             move();
         }
-        g.drawImage(getImage(),x,y,null);
+        g.drawImage(image[direction.ordinal()],x,y,null);
     }
     public boolean isStop(){
         for (int i=0;i<dirs.length;i++){
